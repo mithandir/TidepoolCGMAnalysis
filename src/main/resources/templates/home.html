@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CGM Analysis</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+<h1>Dashboard</h1>
+
+
+<div class="panel panel-default" th:if="${avgToday != null}">
+    <div class="panel-heading">
+        <h3 class="panel-title">Average Today</h3>
+    </div>
+    <div class="panel-body">
+        <span th:text="${#numbers.formatDecimal(avgToday, 0, 2)}" /> mmol/L
+        <span style="margin-left: 2em" th:text="${#numbers.formatDecimal(avgToday*18, 0, 0)}" /> mg/dL
+    </div>
+</div>
+
+<div class="panel panel-default" th:if="${avgYesterday != null}">
+    <div class="panel-heading">
+        <h3 class="panel-title">Average Yesterday</h3>
+    </div>
+    <div class="panel-body">
+        <span th:text="${#numbers.formatDecimal(avgYesterday, 0, 2)}" />
+        <span style="margin-left: 2em" th:text="${#numbers.formatDecimal(avgYesterday*18, 0, 0)}" /> mg/dL
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>
