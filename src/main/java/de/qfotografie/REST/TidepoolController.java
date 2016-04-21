@@ -2,7 +2,7 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2016.
  */
 
-package de.qfotografie.REST;
+package de.qfotografie.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.qfotografie.akm.DataPoint;
@@ -31,7 +31,7 @@ public class TidepoolController {
     private String token;
     private String userId;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public void login(String username, String password) {
         LOGGER.info("Login started ...");
