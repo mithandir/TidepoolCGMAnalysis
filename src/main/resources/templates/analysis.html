@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>CGM Analysis</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+        // Load the Visualization API and the piechart package.
+        google.charts.load('current', {'packages': ['line']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Time');
+            data.addColumn('number', 'Derivation from Target');
+            data.addRows([
+                ['0-1h', parseFloat([[${#numbers.formatDecimal(avgHour0-5.6, 0, 2)}]])],
+                ['1-2h', parseFloat([[${#numbers.formatDecimal(avgHour1-5.6, 0, 2)}]])],
+                ['2-3h', parseFloat([[${#numbers.formatDecimal(avgHour2-5.6, 0, 2)}]])],
+                ['3-4h', parseFloat([[${#numbers.formatDecimal(avgHour3-5.6, 0, 2)}]])],
+                ['4-5h', parseFloat([[${#numbers.formatDecimal(avgHour4-5.6, 0, 2)}]])],
+                ['5-6h', parseFloat([[${#numbers.formatDecimal(avgHour5-5.6, 0, 2)}]])],
+                ['6-7h', parseFloat([[${#numbers.formatDecimal(avgHour6-5.6, 0, 2)}]])],
+                ['7-8h', parseFloat([[${#numbers.formatDecimal(avgHour7-5.6, 0, 2)}]])],
+                ['8-9h', parseFloat([[${#numbers.formatDecimal(avgHour8-5.6, 0, 2)}]])],
+                ['9-10h', parseFloat([[${#numbers.formatDecimal(avgHour9-5.6, 0, 2)}]])],
+                ['10-11h', parseFloat([[${#numbers.formatDecimal(avgHour10-5.6, 0, 2)}]])],
+                ['11-12h', parseFloat([[${#numbers.formatDecimal(avgHour11-5.6, 0, 2)}]])],
+                ['12-13h', parseFloat([[${#numbers.formatDecimal(avgHour12-5.6, 0, 2)}]])],
+                ['13-14h', parseFloat([[${#numbers.formatDecimal(avgHour13-5.6, 0, 2)}]])],
+                ['14-15h', parseFloat([[${#numbers.formatDecimal(avgHour14-5.6, 0, 2)}]])],
+                ['15-16h', parseFloat([[${#numbers.formatDecimal(avgHour15-5.6, 0, 2)}]])],
+                ['16-17h', parseFloat([[${#numbers.formatDecimal(avgHour16-5.6, 0, 2)}]])],
+                ['17-18h', parseFloat([[${#numbers.formatDecimal(avgHour17-5.6, 0, 2)}]])],
+                ['18-19h', parseFloat([[${#numbers.formatDecimal(avgHour18-5.6, 0, 2)}]])],
+                ['19-20h', parseFloat([[${#numbers.formatDecimal(avgHour19-5.6, 0, 2)}]])],
+                ['20-21h', parseFloat([[${#numbers.formatDecimal(avgHour20-5.6, 0, 2)}]])],
+                ['21-22h', parseFloat([[${#numbers.formatDecimal(avgHour21-5.6, 0, 2)}]])],
+                ['22-23h', parseFloat([[${#numbers.formatDecimal(avgHour22-5.6, 0, 2)}]])],
+                ['23-24h', parseFloat([[${#numbers.formatDecimal(avgHour23-5.6, 0, 2)}]])]
+            ]);
+
+            var options = {
+                chart: {
+                    title: 'Derivation from target blood sugar',
+                    subtitle: 'in mmol/L - ignore -5 values',
+                    curveType: 'function'
+                },
+                width: 600,
+                height: 400
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.charts.Line(document.getElementById('chart_div'));
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+    </script>
+</head>
+<body>
+<div th:replace="fragments/header :: header">...</div>
+<h1>Analysis</h1>
+
+<div id="chart_div"/>
+
+<div th:replace="fragments/footer :: footer">...</div>
+</body>
+</html>

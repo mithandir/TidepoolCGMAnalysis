@@ -1,9 +1,9 @@
 package de.qfotografie.akm;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataPoint implements Serializable {
@@ -11,8 +11,6 @@ public class DataPoint implements Serializable {
 
     private String type;
     private float value;
-
-    public DataPoint() {}
 
     public Date getTime() {
         return time;
